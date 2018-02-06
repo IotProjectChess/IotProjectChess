@@ -6,24 +6,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:background="#605858"
+        android:background="#00605858"
         android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical">
 
-            <TextView
-                android:id="@+id/sys_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:text="System Message: 체스판 생성중 ... "
-                android:textColor="#ffffff" />
-
-        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -31,10 +17,10 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
-        android:background="#f6eee2">
+        android:background="#00f6eee2">
 
         <GridView
-            android:id="@+id/gv_chessboard"
+            android:id="@+id/gv_block"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
