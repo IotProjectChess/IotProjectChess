@@ -10,10 +10,11 @@ import android.widget.ImageView;
  * Created by user on 2018-02-06.
  */
 
-public class GridAdapter_ChessPieces extends BaseAdapter {
+public class GridAdapter_ChessPieces extends BaseAdapter implements Labels {
     Context context;
     ImageView[] imageView = new ImageView[64];
     ImageView[][] imageView_Pieces = new ImageView[8][8];
+    int[][] imageView_Pieces_id = new int[8][8];
     int[] images = new int[64];
     Utiles utile = new Utiles();
 
@@ -29,11 +30,17 @@ public class GridAdapter_ChessPieces extends BaseAdapter {
     public Object getItem(int position) {return null;}
 
     @Override
-    public long getItemId(int position) {return images[position];}
+    public long getItemId(int position) {
+        //return images[position];
+        if(position == OUT_OF_ARRAY) return OUT_OF_ARRAY;
+        return (long)imageView_Pieces_id[utile.positionToArray(position)[0]][utile.positionToArray(position)[1]];
+    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        utile.setImageView(imageView,position,parent,images,context);
+        if(convertView == null)
+            utile.setImageView(imageView,position,parent,images,context);
+        else imageView[position] = (ImageView)convertView;
         setViewPosition(imageView[position],position);
         return imageView[position];
     }
@@ -41,7 +48,11 @@ public class GridAdapter_ChessPieces extends BaseAdapter {
     public void setViewPosition(ImageView imageview, int position){
         int[] xy = utile.positionToArray(position);
         imageView_Pieces[xy[0]][xy[1]] = imageview;
-        if(position == 0) imageView_Pieces[0][0] = imageview;
+        imageView_Pieces_id[xy[0]][xy[1]] = images[position];
+    }
+    public void setImageResource(int x, int y, int imageResource){
+        imageView_Pieces[x][y].setImageResource(imageResource);
+        imageView_Pieces_id[x][y] = imageResource;
     }
 
     public void setPiecesid(){
